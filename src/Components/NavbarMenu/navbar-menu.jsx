@@ -10,7 +10,6 @@ export class NavbarMenu extends Component {
     super(props);
     this.state = {
       categories: [],
-      isSelected: "all",
     };
   }
 
@@ -42,12 +41,12 @@ export class NavbarMenu extends Component {
         {this.state.categories.map((category) => (
           <div
             timeout={1000}
-            in={this.state.isSelected === category.name}
+            in={this.context.currentCategory === category.name}
             key={category.name}
             classNames="categories-transition"
           >
             <NavbarLink
-              selected={this.state.isSelected === category.name ? true : ""}
+              selected={this.context.currentCategory=== category.name ? true : ""}
               onClick={() => this.handleClick(category.name)}
             >
               <span> {category.name} </span>
