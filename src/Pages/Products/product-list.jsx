@@ -1,9 +1,12 @@
 import React, { Component } from "react";
 import { fetchProductsAPI } from "../../Services/Api";
-import ProductCard from "../../Components/product-card";
-import {ProductsListContainer, ProductsList, CategoryName} from './product-list-styles';
-
-// Button component that'll render an <a> tag with some styles
+import ProductCard from "../../Components/ProductCard/product-card";
+import CartContext from '../../context/cart-context'
+import {
+  ProductsListContainer,
+  ProductsList,
+  CategoryName,
+} from "./product-list-styles";
 
 class ProductList extends Component {
   constructor(props) {
@@ -11,59 +14,48 @@ class ProductList extends Component {
     this.state = {
       products: [],
       selectedCatagory: null,
+      currency: {},
     };
   }
 
-  getData = async () => {
-    // let res = await client.query({
-    //   query: GET_CURRENCIES
-    // })
-    //  console.log()
-    // // Set the state to make changes in UI
-    fetchProductsAPI("clothes").then((res) => {
-      console.log(res);
-      this.setState({ 
+  getData = async (cat) => {
+     fetchProductsAPI(cat).then((res) => {
+      // console.log(res);
+      this.setState({
         products: res.data.category.products,
-        selectedCatagory: 'clothes'});
+        selectedCatagory: this.context.currentCategory,
+      });
     });
   };
 
   componentDidMount() {
-    this.getData();
-    console.log(this.props.item)
+    this.getData("all");
   }
-
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.selectedCatagory !== this.context.currentCategory) {
+      this.getData(this.context.currentCategory);
+    }
+      // this.setState({ selectedCatagory: this.context.currentCategory })
+  }
   render() {
     return (
       <ProductsListContainer>
-        <CategoryName>Category: {this.state.selectedCatagory}</CategoryName>
+        <CategoryName>{this.context.currentCategory}</CategoryName>
         <ProductsList>
-        <div className="indexView">
-          {this.state.products &&  this.state.products.map((item) => (
-                <ProductCard item={item} key={item.id} />
-              ))
-            }
-      </div>
+            {this.state.products &&
+              this.state.products.map(product => (
+                <ProductCard product={product} key={product.id} prices={product.prices} />
+                // <ProductCard product={product} key={product.id} currency={this.state.currency} />
+                // <ProductCard product={product} key={product.id} currency={this.state.currency} />
+                // <ProductCard product={product} key={product.id} currency={this.state.currency} />
+                // <ProductCard product={product} key={product.id} currency={this.state.currency} />
+              ))}
         </ProductsList>
       </ProductsListContainer>
-
-      //      <div className='indexContainer'>
-      //      {/* <h1 className='categoryTitle'>{this.context.currentCategory}</h1> */}
-      //      <div className='indexView'>
-      //          {
-      //            // console.log(this.state.currency)
-      //              this.state.currency ?
-      //                  this.state.currency.map((d) =>
-
-      //                      <p key={d.label}>{d.label} +" "+ {d.symbol}</p>
-      //                  )
-      //                  : null
-      //              // console.log( this.state.currency.data)
-      //          }
-      //      </div>
-      //  </div>
     );
   }
 }
+
+ProductList.contextType = CartContext
 
 export default ProductList;
