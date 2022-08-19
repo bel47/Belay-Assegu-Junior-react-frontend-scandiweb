@@ -138,7 +138,7 @@ export const TotalPriceContainer = styled.div`
     align-items: flex-start;
     padding: 0px;
     gap: 44px;
-    width: 198px;
+    // width: 198px;
     height: 28px;
     p {
         TotalPricewidth: 60px;

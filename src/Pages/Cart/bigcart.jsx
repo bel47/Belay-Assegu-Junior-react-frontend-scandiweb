@@ -11,7 +11,7 @@ import {
 import BigCartItem from "./bigcart-item";
 import CartContext from "../../context/cart-context";
 import Button from "../../Components/Shared/Button";
-import TotalPrice from '../../Components/Shared/TotalPrice'
+import TotalPrice from "../../Components/Shared/TotalPrice";
 export class BigCart extends Component {
   render() {
     return (
@@ -40,18 +40,7 @@ export class BigCart extends Component {
             <Tax>Tax 21%: $42.00</Tax>
             <Tax>Quantity: 3</Tax>
             <TotalPriceContainer>
-              {/* <p>Total: {this.context.totalItemPrices &&
-                    this.context.totalItemPrices.map(
-                      (price) =>
-                        price.currency.symbol === this.context.currency && (
-                          <frameElement
-                            key={price.currency.symbol + price.amount}
-                          >
-                            {price.currency.symbol} {price.amount.toFixed(2)}
-                          </frameElement>
-                        )
-                    )}</p> */}
-                  <p>Total:</p>  <TotalPrice/>
+              <p>Total:</p> <TotalPrice />
             </TotalPriceContainer>
             <Button primary large>
               ORDER

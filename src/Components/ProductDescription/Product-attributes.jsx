@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import {
   PDPTitle,
   PDPSubtitle,
@@ -59,7 +59,7 @@ export class ProductAttributes extends Component {
               .amount.toFixed(2)} */}
             <Price item={product} />
           </PDPPrice>
-          <Fragment
+          <frameElement
             onClick={() => this.addItemWithDefaultAttrs(product.id, product)}
           >
             {product.inStock && (
@@ -67,7 +67,7 @@ export class ProductAttributes extends Component {
                 ADD TO CART
               </Button>
             )}
-          </Fragment>
+          </frameElement>
 
           <ProductDescription>
             <Interweave content={product.description} />

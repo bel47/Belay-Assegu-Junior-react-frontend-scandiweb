@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import CartContext from "../../context/cart-context";
 
 export class TotalPrice extends Component {
@@ -9,11 +9,11 @@ export class TotalPrice extends Component {
             this.context.totalItemPrices.map(
               (price) =>
                 price.currency.symbol === this.context.currency && (
-                  <frameElement
+                  <Fragment
                     key={price.currency.symbol + price.amount}
                   >
                     {price.currency.symbol} {price.amount.toFixed(2)}
-                  </frameElement>
+                  </Fragment>
                 )
             )} 
         </p>

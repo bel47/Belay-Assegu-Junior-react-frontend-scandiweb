@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import { Link } from "react-router-dom";
 
 import {
@@ -66,45 +66,34 @@ export class CartButton extends Component {
           <img src={cart} alt="shopping cart" />
           {<CartItemCount>{this.context.totalItemCount}</CartItemCount>}
           <CartContent>
-            <CartTitle>My bag, <span>{this.context.totalItemCount} items</span></CartTitle>
+            <CartTitle>
+              My bag, <span>{this.context.totalItemCount} items</span>
+            </CartTitle>
             <NavbarCartItems>
               <>
                 {this.context.items && this.context.items.length !== 0 ? (
                   this.context.items.map((item, i) => (
-                    <frameElement key={item.itemUUID}>
+                    <Fragment key={item.itemUUID}>
                       <CartItem
                         item={item.itemInfo}
                         selectedAttrs={item.selectedAttrs}
                         count={item.count}
                         order={i}
-                        attr ={item.attr}
+                        attr={item.attr}
                       />
-                    </frameElement>
+                    </Fragment>
                   ))
                 ) : (
-                  <>
-                    <p>
-                      No Items <br></br>
-                      <FaOpencart size={100} />
-                    </p>
-                  </>
+                  <p>
+                    No Items <br></br>
+                    <FaOpencart size={100} />
+                  </p>
                 )}
               </>
               <TotalPriceContainer>
                 <SPAN>Total</SPAN>
                 <SPAN price>
-                  {/* {this.context.totalItemPrices &&
-                    this.context.totalItemPrices.map(
-                      (price) =>
-                        price.currency.symbol === this.context.currency && (
-                          <frameElement
-                            key={price.currency.symbol + price.amount}
-                          >
-                            {price.currency.symbol} {price.amount.toFixed(2)}
-                          </frameElement>
-                        )
-                    )} */}
-                    <TotalPrice />
+                  <TotalPrice />
                 </SPAN>
               </TotalPriceContainer>
             </NavbarCartItems>

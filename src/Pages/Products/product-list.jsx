@@ -28,12 +28,13 @@ class ProductList extends Component {
   };
 
   componentDidMount() {
-    this.getData(this.context.currentCategory);
+    this.getData("all");
   }
-  componentDidUpdate(prevState) {
+  componentDidUpdate(prevProps, prevState) {
     if (prevState.selectedCatagory !== this.context.currentCategory) {
       this.getData(this.context.currentCategory);
     }
+      // this.setState({ selectedCatagory: this.context.currentCategory })
   }
   render() {
     return (
