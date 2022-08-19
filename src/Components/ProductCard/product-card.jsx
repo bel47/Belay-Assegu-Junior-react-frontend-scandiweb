@@ -15,6 +15,7 @@ import {
 import CartContext from "../../context/cart-context";
 import { Navigate } from "react-router-dom";
 import addtocart from "../../Assets//addtocart.svg";
+import Price from "../Shared/Price";
 
 
 export class ProductCard extends Component {
@@ -72,21 +73,7 @@ export class ProductCard extends Component {
             {product.brand} {product.name}
           </ProductCardBrand>
           <ProductPrice inStock={!product.inStock}>
-            {/* {prices[0].currency.symbol} */}
-            {this.context.currency}
-            {prices
-              .filter(
-                (price) => price.currency.symbol === `${this.context.currency}`
-              )[0]
-              .amount.toFixed(2)}
-            {
-              //  prices.map(price =>
-              //       price.currency.symbol === this.context.currency &&
-              //           <React.Fragment key={price.currency.symbol + price.amount}>
-              //               {price.currency.symbol} {price.amount.toFixed(2)}
-              //           </React.Fragment>
-              //   )
-            }
+              <Price item={product}/>
           </ProductPrice>
         </ContentContainer>
       </ProductCardBox>
