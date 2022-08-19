@@ -20,7 +20,6 @@ class ProductList extends Component {
 
   getData = async (cat) => {
      fetchProductsAPI(cat).then((res) => {
-      // console.log(res);
       this.setState({
         products: res.data.category.products,
         selectedCatagory: this.context.currentCategory,
@@ -29,13 +28,12 @@ class ProductList extends Component {
   };
 
   componentDidMount() {
-    this.getData("all");
+    this.getData(this.context.currentCategory);
   }
   componentDidUpdate(prevProps, prevState) {
     if (prevState.selectedCatagory !== this.context.currentCategory) {
       this.getData(this.context.currentCategory);
     }
-      // this.setState({ selectedCatagory: this.context.currentCategory })
   }
   render() {
     return (
