@@ -9,9 +9,14 @@ export const ProductCardBox = styled.div`
     transition: all 0.3s ease;
     z-index: 1;
     cursor: pointer;
+    background: #FFFFFF;
+
     &:hover{
-      background: #FFFFFF;
       box-shadow: 0px 4px 35px rgba(168, 172, 176, 0.19);
+      ${props => props.hover &&`${AddtoCartButton} {
+            display: block;
+          }`
+        }
     }
 `;
 
@@ -115,4 +120,18 @@ export const ProductPrice = styled.h4`
         color: #8D8F9A;
       `
     }
+`;
+
+export const AddtoCartButton = styled.span`
+    display:none;
+    position: absolute;
+    width: 52px;
+    height: 52px;
+    &:hover{
+      drop-shadow(0px 4px 11px rgba(29, 31, 34, 0.1));
+    }
+    margin-top: 226px;
+    margin-right: 30px;
+    align-self: flex-end;
+    z-index: 3;
 `;

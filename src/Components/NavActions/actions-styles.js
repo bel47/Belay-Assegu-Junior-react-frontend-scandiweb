@@ -1,4 +1,5 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
+import CustomButton from './custom-button.styles';
 
 export const NavbarActionContainer = styled.div`
     display: flex;
@@ -14,38 +15,64 @@ export const NavbarActionContainer = styled.div`
     top: 23px;
 `;
 
-export const CurrencyContainer = styled.div`
-    cursor: pointer;
-    height: 100%;
-    user-select: none;
-    position: relative;
-    font-weight: 500;
-    & img{
-        margin-left: 3px;
-    }
-`;
-
 export const Header = styled.div`
     display: flex;
     height: 100%;
     font-size: 1.2rem;
     font-weight: 500;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     transition: opacity 0.3s ease;
 `;
 
-export const Symbol = styled.div`
-
-`;
-
-export const Content = styled.div`
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-    column-gap: 0.5rem;
-    padding: 0.5rem 2.5rem;
-    font-size: 1.2rem;
+export const Lable = styled.label`
+    position: absolute;
     font-weight: 500;
-    cursor: pointer;
-    transition: all 0.15s ease;
+    font-size: 18px;
+    line-height: 160%;
+    color: #1D1F22;
 `;
+
+export const CurrencyContent = styled.div`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 12px 16px;
+    cursor: pointer;
+    height: 45px;
+      &:hover {
+        background: #EEEEEE;
+    }
+`;
+
+const CDD = keyframes`
+    0% {
+        height: 0px;
+    }
+    100% {
+        height: 264px;
+    }
+`;
+
+export const DropDownContent = styled.div`
+    display: none;
+    position: absolute;
+    width: 114px;
+    min-height: 169px;
+    top: 42px;
+    background: #FFFFFF;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    margin-left: -24px;
+  // animation: ${CDD} .4s;
+    z-index: 1;
+`;
+
+export const CurrencyDropDown = styled.div`
+    display: inline-block;
+    cursor:pointer;
+    ${props => props.show && ` ${DropDownContent} {
+                display: block
+        }`
+  }
+`;
+

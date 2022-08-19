@@ -1,5 +1,5 @@
-import React, { Component } from 'react'
-import uuid from 'react-uuid'
+import React, { Component, createContext } from 'react'
+import { v4 as uuidv4 } from 'uuid';
 
 const shallowEqual = (object1, object2) => {
     const keys1 = Object.keys(object1);
@@ -16,152 +16,152 @@ const shallowEqual = (object1, object2) => {
 }
 
 window.localStorage.setItem(
-  'state',
-  JSON.stringify({
-      currentCategory: 'all',
-      currency: '$',
-      totalItemCount: 0,
-      ...JSON.parse(window.localStorage.getItem('state')),
-      isDimmed: false
-  })
-)
-
-const CartContext = React.createContext({})
-
-export class CartProvider extends Component {
-  constructor(props) {
-    super(props)
-    this.state = JSON.parse(window.localStorage.getItem('state')) || {
-        items: [],
+    'state',
+    JSON.stringify({
         currentCategory: 'all',
         currency: '$',
-        isDimmed: false,
         totalItemCount: 0,
-        totalItemPrices: []
-    }
-}
-
-setState(state) {
-    window.localStorage.setItem('state', JSON.stringify({
         ...JSON.parse(window.localStorage.getItem('state')),
-        ...state
-    }))
-    super.setState(state)
-}
+        isDimmed: false
+    })
+)
 
-addItemCount = (plusCount) => {
-    this.setState({ totalItemCount: this.state.totalItemCount + plusCount })
-}
+const CartContext = createContext({})
 
-componentDidUpdate(prevProps, prevState) {
-    if (prevState.items !== this.state.items) {
-        let totalPrices = Array(5).fill({
-            amount: 0,
-            currency: {
-                label: null,
-                symbol: null
-            }
-        })
+export class CartProvider extends Component {
+    constructor(props) {
+        super(props)
+        this.state = JSON.parse(window.localStorage.getItem('state')) || {
+            items: [],
+            currentCategory: 'all',
+            currency: '$',
+            isDimmed: false,
+            totalItemCount: 0,
+            totalItemPrices: []
+        }
+    }
 
-        for (let item of this.state.items) {
-            for (const [j, price] of item.itemInfo.prices.entries()) {
-                totalPrices[j] = {
-                    amount: totalPrices.at(j).amount + price.amount * item.count,
-                    currency: {
-                        ...price.currency
+    setState(state) {
+        window.localStorage.setItem('state', JSON.stringify({
+            ...JSON.parse(window.localStorage.getItem('state')),
+            ...state
+        }))
+        super.setState(state)
+    }
+
+    addItemCount = (plusCount) => {
+        this.setState({ totalItemCount: this.state.totalItemCount + plusCount })
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        if (prevState.items !== this.state.items) {
+            let totalPrices = Array(5).fill({
+                amount: 0,
+                currency: {
+                    label: null,
+                    symbol: null
+                }
+            })
+
+            for (let item of this.state.items) {
+                for (const [j, price] of item.itemInfo.prices.entries()) {
+                    totalPrices[j] = {
+                        amount: totalPrices.at(j).amount + price.amount * item.count,
+                        currency: {
+                            ...price.currency
+                        }
                     }
                 }
             }
+
+            this.setState({ totalItemPrices: totalPrices })
         }
 
-        this.setState({ totalItemPrices: totalPrices })
     }
 
-}
+    addItem = (itemId, itemInfo, selectedAttrs) => {
 
-addItem = (itemId, itemInfo, selectedAttrs) => {
+        this.addItemCount(1)
 
-    this.addItemCount(1)
+        if (!this.state.items || this.state.items.length === 0) {
+            this.setState({
+                items: [{
+                    itemId: itemId,
+                    itemInfo: itemInfo,
+                    itemUUID: uuidv4(),
+                    selectedAttrs: selectedAttrs,
 
-    if (!this.state.items || this.state.items.length === 0) {
-        this.setState({
-            items: [{
-                itemId: itemId,
-                itemInfo: itemInfo,
-                itemUUID: uuid(),
-                selectedAttrs: selectedAttrs,
-
-                count: 1
-            }]
-        })
-        return
-    }
-
-    let items = [...this.state.items]
-    for (const [i, item] of items.entries()) {
-        if (item.itemId === itemId && shallowEqual(selectedAttrs, item.selectedAttrs)) {
-            items.at(i).count = items.at(i).count + 1
-            this.setState({ items: items })
+                    count: 1
+                }]
+            })
             return
         }
-    }
 
-    this.setState({
-        items: [
-            ...this.state.items,
-            {
-                itemId: itemId,
-                itemInfo: itemInfo,
-                itemUUID: uuid(),
-                selectedAttrs: selectedAttrs,
-                count: 1
+        let items = [...this.state.items]
+        for (const [i, item] of items.entries()) {
+            if (item.itemId === itemId && shallowEqual(selectedAttrs, item.selectedAttrs)) {
+                items.at(i).count = items.at(i).count + 1
+                this.setState({ items: items })
+                return
             }
-        ]
-    })
+        }
 
-}
+        this.setState({
+            items: [
+                ...this.state.items,
+                {
+                    itemId: itemId,
+                    itemInfo: itemInfo,
+                    itemUUID: uuidv4(),
+                    selectedAttrs: selectedAttrs,
+                    count: 1
+                }
+            ]
+        })
 
-setAttribute = (position, newAttrKey, newAttr) => {
-    let items = [...this.state.items]
-    items.at(position).selectedAttrs[newAttrKey] = newAttr
-    this.setState({ items: items })
-}
-
-setCount = (position, newCount) => {
-    this.addItemCount(newCount - this.state.items.at(position).count)
-
-    let items = [...this.state.items]
-    items.at(position).count = newCount
-
-    if (newCount <= 0) {
-        items.splice(position, 1)
     }
 
-    this.setState({ items: items })
-}
+    setAttribute = (position, newAttrKey, newAttr) => {
+        let items = [...this.state.items]
+        items.at(position).selectedAttrs[newAttrKey] = newAttr
+        this.setState({ items: items })
+    }
 
-setCategory = (category) => {
-    this.setState({ currentCategory: category })
-}
+    setCount = (position, newCount) => {
+        this.addItemCount(newCount - this.state.items.at(position).count)
 
-setCurrency = (currency) => {
-    this.setState({ currency: currency })
-}
+        let items = [...this.state.items]
+        items.at(position).count = newCount
 
-toggleDimm = () => {
-    this.setState({ isDimmed: !this.state.isDimmed })
-}
+        if (newCount <= 0) {
+            items.splice(position, 1)
+        }
 
-render() {
-    return (
-        <CartContext.Provider value={{
-            ...this,
-            ...this.state
-        }}>
-            {this.props.children}
-        </CartContext.Provider>
-    )
-}
+        this.setState({ items: items })
+    }
+
+    setCategory = (category) => {
+        this.setState({ currentCategory: category })
+    }
+
+    setCurrency = (currency) => {
+        this.setState({ currency: currency })
+    }
+
+    toggleDimm = () => {
+        this.setState({ isDimmed: !this.state.isDimmed })
+    }
+
+    render() {
+        return (
+            <CartContext.Provider value={{
+                ...this,
+                ...this.state
+            }}>
+                {this.props.children}
+            </CartContext.Provider>
+        )
+    }
 }
 
 export default CartContext

@@ -1,13 +1,13 @@
 import styled, {css, span} from "styled-components";
 import { Link } from 'react-router-dom';
 
-export const NavbarLinkContainer = styled.div`
-    display: flex;
-    height: 80px;
-    justify-content: flex-start;
-    align-items: center;
-    margin-left: 100px;
-`;
+// export const NavbarLinkContainer = styled.div`
+//     display: flex;
+//     height: 80px;
+//     justify-content: flex-start;
+//     align-items: center;
+//     margin-left: 100px;
+// `;
 
 export const NavbarLink = styled.p`
     display: flex;

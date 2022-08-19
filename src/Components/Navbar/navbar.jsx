@@ -3,18 +3,24 @@ import {
   NavbarContainer,
   NavbarLogo,
   NavbarActionContainer,
+  NavbarLinkContainer,
 } from "./navbar-styles";
+import logo from "../../Assets/logo.svg";
 import NavbarMenu from "../NavbarMenu/navbar-menu";
 import Actions from "../NavActions/actions";
-
+import { Link } from "react-router-dom";
 
 export class Navbar extends Component {
   render() {
     return (
       <NavbarContainer>
-        <NavbarMenu />
+        <NavbarLinkContainer>
+          <NavbarMenu />
+        </NavbarLinkContainer>
         <NavbarLogo>
-          <img src="/logo.svg" alt="Logo" />
+          <Link to="/">
+            <img src={logo} alt="Logo" />
+          </Link>
         </NavbarLogo>
         <NavbarActionContainer>
           <Actions />
@@ -23,6 +29,5 @@ export class Navbar extends Component {
     );
   }
 }
-
 
 export default Navbar;

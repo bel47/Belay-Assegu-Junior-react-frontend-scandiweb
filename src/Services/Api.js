@@ -3,13 +3,15 @@ import { onError } from '@apollo/client/link/error';
 
 import * as queries from '../GraphQL/Queries';
 
-const errorLink = onError((graphqlErrors, networkError) => {
-    if (graphqlErrors) {
-        graphqlErrors.map((msg, location, path) => {
-            alert(`Graphql err ${msg}`);
-        })
-    }
-});
+const errorLink  = onError(({ graphQLErrors, networkError }) => {
+    if (graphQLErrors)
+      graphQLErrors.map(({ message, locations, path }) =>
+        console.log(
+          `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
+        )
+      )
+    if (networkError) {alert(`[Network error]: ${networkError}`)}
+  });
 
 const link = from([
     errorLink,
@@ -40,7 +42,6 @@ const fetchCategoriesAPI = async () => {
     const result = await client.query({ query: queries.GET_CATAGORIS });
     return result;
 };
-
 
 const fetchProductAPI = async (id) => {
     const result = await client.query({

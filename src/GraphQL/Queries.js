@@ -18,8 +18,8 @@ export const GET_CURRENCIES = gql`
   `;
 
 export const GET_PRODUCT = gql`
-    query FetchProduct {
-        product(id: "huarache-x-stussy-le") {
+    query FetchProduct($id: String!) {
+        product(id: $id) {
             id
             name
             inStock

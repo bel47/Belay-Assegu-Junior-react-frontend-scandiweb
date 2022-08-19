@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const NavbarLogo =styled.div`
+export const NavbarLogo = styled.div`
     position: absolute;
     top: 0;
     bottom: 0;
@@ -21,10 +21,18 @@ export const NavbarContainer = styled.div`
     z-index: 100;
 `;
 
-export const NavbarActionContainer  = styled.div`
+export const NavbarActionContainer = styled.div`
+    display: flex;
     width: 100%;
     height: 100%;
-    display: flex;
     justify-content: flex-end;
     align-items: center;
+`;
+
+export const NavbarLinkContainer = styled.div`
+    display: flex;
+    height: 80px;
+    justify-content: flex-start;
+    align-items: center;
+    margin-left: 100px;
 `;

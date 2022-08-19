@@ -45,10 +45,6 @@ class ProductList extends Component {
             {this.state.products &&
               this.state.products.map(product => (
                 <ProductCard product={product} key={product.id} prices={product.prices} />
-                // <ProductCard product={product} key={product.id} currency={this.state.currency} />
-                // <ProductCard product={product} key={product.id} currency={this.state.currency} />
-                // <ProductCard product={product} key={product.id} currency={this.state.currency} />
-                // <ProductCard product={product} key={product.id} currency={this.state.currency} />
               ))}
         </ProductsList>
       </ProductsListContainer>

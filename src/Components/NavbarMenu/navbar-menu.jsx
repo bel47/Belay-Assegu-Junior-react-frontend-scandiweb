@@ -28,7 +28,7 @@ export class NavbarMenu extends Component {
 
   handleClick = (category) => {
     this.setState({ ...this.state, isSelected: category });
-    // console.log(this.props.navigation);
+    console.log(this.props.navigation);
     this.context.setCategory(category)
   };
 
@@ -37,23 +37,23 @@ export class NavbarMenu extends Component {
     // const match = useRouteMatch("match/this/route/:id")
 
     return (
-      <NavbarLinkContainer>
+      <>
         {this.state.categories.map((category) => (
-          <div
-            timeout={1000}
-            in={this.context.currentCategory === category.name}
-            key={category.name}
-            classNames="categories-transition"
-          >
+          // <div
+          //   timeout={1000}
+          //   in={this.context.currentCategory === category.name}
+          //   key={category.name}
+          //   classNames="categories-transition"
+          // >
             <NavbarLink
-              selected={this.context.currentCategory=== category.name ? true : ""}
+              selected={this.context.currentCategory === category.name}
               onClick={() => this.handleClick(category.name)}
             >
               <span> {category.name} </span>
             </NavbarLink>
-          </div>
+          // </div>
         ))}
-      </NavbarLinkContainer>
+      </>
     );
   }
 }
