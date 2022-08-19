@@ -30,7 +30,7 @@ class ProductList extends Component {
   componentDidMount() {
     this.getData(this.context.currentCategory);
   }
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate(prevState) {
     if (prevState.selectedCatagory !== this.context.currentCategory) {
       this.getData(this.context.currentCategory);
     }
