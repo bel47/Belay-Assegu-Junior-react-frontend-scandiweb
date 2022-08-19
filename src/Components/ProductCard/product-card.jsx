@@ -17,11 +17,10 @@ import { Navigate } from "react-router-dom";
 import addtocart from "../../Assets//addtocart.svg";
 import Price from "../Shared/Price";
 
-
 export class ProductCard extends Component {
   constructor(props) {
     super(props);
-    this.state = { product: props.product, navigate: false };
+    this.state = { navigate: false };
   }
 
   addItemWithDefaultAttrs = (itemId, item) => {
@@ -37,7 +36,7 @@ export class ProductCard extends Component {
   };
 
   cardClickHandler = () => {
-    this.setState({ ...this.state, navigate: true });
+    this.setState({ navigate: true });
   };
 
   render() {
@@ -46,8 +45,8 @@ export class ProductCard extends Component {
       return <Navigate to={`/products/${product.id}`} />;
     }
     return (
-      <ProductCardBox hover onClick={this.cardClickHandler}>
-        <ImagePreview>
+      <ProductCardBox hover>
+        <ImagePreview onClick={this.cardClickHandler}>
           <img src={product.gallery[0]} alt="Preview" />
           {!product.inStock && (
             <OutOfStock inStock>
@@ -57,12 +56,7 @@ export class ProductCard extends Component {
         </ImagePreview>
         {product.inStock && (
           <AddtoCartButton
-            onClick={() =>
-              this.addItemWithDefaultAttrs(
-                this.state.product.id,
-                this.state.product
-              )
-            }
+            onClick={() => this.addItemWithDefaultAttrs(product.id, product)}
           >
             <img src={addtocart} />
           </AddtoCartButton>
@@ -73,7 +67,7 @@ export class ProductCard extends Component {
             {product.brand} {product.name}
           </ProductCardBrand>
           <ProductPrice inStock={!product.inStock}>
-              <Price item={product}/>
+            <Price item={product} />
           </ProductPrice>
         </ContentContainer>
       </ProductCardBox>
