@@ -86,6 +86,7 @@ export const CartContent = styled.div`
     z-index: 1;
     height: fit-content;
     max-height: 45rem;
+    cursor:default;
 `;
 
 export const TotalPriceContainer = styled.div`
@@ -141,6 +142,9 @@ export const QuantityButton = styled.div`
     gap: 32px;
     width: 24px;
     min-height: 190px;
+    & img {
+        cursor:pointer;
+    }
 `;
 
 export const MiniCartImg = styled.div`

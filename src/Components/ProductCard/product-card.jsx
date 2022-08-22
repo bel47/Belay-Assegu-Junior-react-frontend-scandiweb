@@ -41,7 +41,7 @@ export class ProductCard extends Component {
   };
 
   render() {
-    const { product, prices } = this.props;
+    const { product } = this.props;
     if (this.state.navigate) {
       return <Navigate to={`/products/${product.id}`} />;
     }
@@ -59,7 +59,7 @@ export class ProductCard extends Component {
           <AddtoCartButton
             onClick={() => this.addItemWithDefaultAttrs(product.id, product)}
           >
-            <img src={addtocart} />
+            <img src={addtocart} alt="add to cart"/>
           </AddtoCartButton>
         )}
         <ContentContainer>
