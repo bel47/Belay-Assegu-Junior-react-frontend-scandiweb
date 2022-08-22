@@ -3,14 +3,13 @@ import {
   Thumbnail,
   SliderImage,
   CurrentImageContainer,
-} from "./product-list-styles";
+} from "./product-description-styles";
 
 export class ProductGallery extends Component {
   constructor(props) {
     super(props);
     this.state = {
       currentImage: null,
-      // gallery: props.gallery,
     };
   }
 
@@ -24,7 +23,7 @@ export class ProductGallery extends Component {
       <>
         <Thumbnail>
           {gallery.map((image, index) => (
-            <SliderImage key={index + "container"}>
+            <SliderImage key={index}>
               <img
                 src={image}
                 key={index}

@@ -1,7 +1,5 @@
 import React, { Component } from "react";
-import { NavbarLinkContainer, NavbarLink } from "./navbar-menu-styles";
-// import { CSSTransition } from 'react-transition-group';
-
+import { NavbarLink } from "./navbar-menu-styles";
 import { fetchCategoriesAPI } from "../../Services/Api";
 import CartContext from '../../context/cart-context'
 
@@ -17,9 +15,8 @@ export class NavbarMenu extends Component {
     this.getData();
   }
 
-  getData = async () => {
+  getData = () => {
     fetchCategoriesAPI().then((res) => {
-      // console.log(res);
       this.setState({
         categories: res.data.categories,
       });
@@ -28,30 +25,20 @@ export class NavbarMenu extends Component {
 
   handleClick = (category) => {
     this.setState({ ...this.state, isSelected: category });
-    console.log(this.props.navigation);
     this.context.setCategory(category)
   };
 
   render() {
-    // console.log(this.props.location.pathname)
-    // const match = useRouteMatch("match/this/route/:id")
-
     return (
       <>
         {this.state.categories.map((category) => (
-          // <div
-          //   timeout={1000}
-          //   in={this.context.currentCategory === category.name}
-          //   key={category.name}
-          //   classNames="categories-transition"
-          // >
             <NavbarLink
               selected={this.context.currentCategory === category.name}
               onClick={() => this.handleClick(category.name)}
+              key={category.name}
             >
               <span> {category.name} </span>
             </NavbarLink>
-          // </div>
         ))}
       </>
     );

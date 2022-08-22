@@ -12,7 +12,6 @@ export const Thumbnail = styled.div`
     display: block;
     overflow: scroll;
     padding: 2px;
-
     &::-webkit-scrollbar {
     display: none;
     }
@@ -93,16 +92,8 @@ export const Attributes = styled.div`
 
 export const SwatchButton = styled.label`
     box-sizing: border-box;
-    // position: absolute;
     width: 63px;
     height: 45px;
-    // border: 1px solid #1D1F22;
-    //    & span:active {
-    //             background-color: #F7F7F7;
-    //             transform: scale(.96);
-    //             color: #292929;
-    //     }
-
     & span {
         width: 63px;
         height: 45px;
@@ -134,24 +125,6 @@ export const AttributeButton = styled.label`
 `;
 
 export const PDPPrice = styled.p`
-    // position: absolute;
-    // width: 86px;
-    // height: 46px;
-    // // left: 929px;
-    // // top: 494px;
-
-    // font-family: 'Raleway';
-    // font-style: normal;
-    // font-weight: 700;
-    // font-size: 24px;
-    // line-height: 18px;
-    // /* or 75% */
-
-    // display: flex;
-    // align-items: center;
-
-    // color: #1D1F22;
-
     font-family: 'Raleway';
     font-style: normal;
     font-weight: 700;
@@ -174,13 +147,7 @@ export const ProductDescription = styled.div`
     font-weight: 400;
     font-size: 16px;
     line-height: 159.96%;
-
-    // position: absolute;
-    // width: 292px;
-    // height: 103px;
-    // left: calc(50% - 292px/2 + 355px);
     bottom: 178px;
-
     &::-webkit-scrollbar {
         display: none;
     }

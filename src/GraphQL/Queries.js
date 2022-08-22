@@ -49,7 +49,7 @@ export const GET_PRODUCT = gql`
     `;
 
 export const GET_PRODUCTS_BY_CATAGORY = gql`
-    query getProducts($title: String!){
+    query getProducts ($title: String!){
         category(input: {title: $title}) {
             products {
                 id

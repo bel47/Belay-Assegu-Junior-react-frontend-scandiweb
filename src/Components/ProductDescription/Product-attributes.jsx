@@ -1,32 +1,38 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import {
   PDPTitle,
   PDPSubtitle,
   Attributes,
   PDPPrice,
   ProductDescription,
-} from "./product-list-styles";
+} from "./product-description-styles";
 import AttributeButtons from "./attribute-buttons";
-import Button from "../../Components/Shared/Button";
+import Button from "../Shared/Button";
 import CartContext from "../../context/cart-context";
 import { Interweave } from "interweave";
-import Price from "../../Components/Shared/Price";
+import Price from "../Shared/Price";
 
 export class ProductAttributes extends Component {
-  addItemWithDefaultAttrs = (itemId, item) => {
-    let selectedAttrs = {};
-    for (let attr of item.attributes) {
-      selectedAttrs = {
-        ...selectedAttrs,
-        [attr.id]: attr.items.at(0).value,
-      };
+  constructor(props) {
+    super(props);
+    this.state = {
+      selectedAttrs: {},
+      disabled: true,
+    };
+  }
+  setAttributes = (id, attr) => {
+    if (this.state.selectedAttrs[id] !== attr) {
+      this.setState({
+        selectedAttrs: {
+          ...this.state.selectedAttrs,
+          [id]: attr,
+        },
+      });
     }
-
-    this.context.addItem(itemId, item, selectedAttrs);
   };
+
   render() {
     const { product } = this.props;
-    // console.log("PD", product);
     return (
       product && (
         <>
@@ -43,7 +49,8 @@ export class ProductAttributes extends Component {
                     name={attr.name}
                     id={attr.id}
                     key={a.id + attr.id}
-                    onClick={this.props.onClick}
+                    onClick={this.setAttributes}
+                    selectedAttrs={this.state.selectedAttrs}
                   />
                 ))}
               </Attributes>
@@ -51,24 +58,30 @@ export class ProductAttributes extends Component {
           ))}
           <PDPSubtitle>PRICE:</PDPSubtitle>
           <PDPPrice>
-            {/* {this.context.currency}
-            {product.prices
-              .filter(
-                (price) => price.currency.symbol === `${this.context.currency}`
-              )[0]
-              .amount.toFixed(2)} */}
             <Price item={product} />
           </PDPPrice>
-          <frameElement
-            onClick={() => this.addItemWithDefaultAttrs(product.id, product)}
+          <div
+            onClick={() =>
+              this.context.addItem(
+                product.id,
+                product,
+                this.state.selectedAttrs
+              )
+            }
           >
             {product.inStock && (
-              <Button primary large>
+              <Button
+                primary
+                large
+                isDisabled={
+                  Object.keys(this.state.selectedAttrs).length !==
+                  product.attributes.length
+                }
+              >
                 ADD TO CART
               </Button>
             )}
-          </frameElement>
-
+          </div>
           <ProductDescription>
             <Interweave content={product.description} />
           </ProductDescription>

@@ -2,18 +2,13 @@ import React, { Component } from "react";
 import {
   CurrencyDropDown,
   Header,
-  Symbol,
   DropDownContent,
   CurrencyContent,
   Lable,
 } from "./actions-styles";
 import CartContext from "../../context/cart-context";
 import { fetchCurrenciesAPI } from "../../Services/Api";
-import { FaAngleUp, FaAngleDown ,FaPlus,FaMinusSquare} from 'react-icons/fa'
-
 import { BiChevronUp, BiChevronDown } from "react-icons/bi";
-
-
 export class CurrencySwitcher extends Component {
   constructor(props) {
     super(props);
@@ -27,7 +22,6 @@ export class CurrencySwitcher extends Component {
 
   getData = async () => {
     fetchCurrenciesAPI().then((res) => {
-      console.log(res);
       this.setState({
         currencies: res.data.currencies,
       });
@@ -38,10 +32,6 @@ export class CurrencySwitcher extends Component {
     document.addEventListener("mousedown", this.handleClickOutside);
     this.getData();
   }
-
-  // componentWillUnmount() {
-  //   document.removeEventListener("mousedown", this.handleClickOutside);
-  // }
 
   handleClickOutside = (event) => {
     if (
@@ -63,25 +53,11 @@ export class CurrencySwitcher extends Component {
     this.context.setCurrency(currency.symbol)
   };
 
-  // componentDidUpdate(prevProps) {
-  //   if (prevProps.currencies.data !== this.props.currencies.data) {
-  //     this.setState({
-  //       ...this.state,
-  //       currencies: this.props.currencies.data,
-  //       selected: { ...this.props.currencies.selected },
-  //     });
-  //   }
-  // }
-
   render() {
     return (
       <CurrencyDropDown show={this.state.showMenu}>
         <Header onClick={this.dropdownClickHandler} ref={this.iconRef}>
            {this.context.currency}
-          {/* <img
-            src=
-            alt="currencies"
-          /> */}
           {!this.state.showMenu ?  <BiChevronDown /> : <BiChevronUp />}
         </Header>
         <DropDownContent ref={this.menuRef}>

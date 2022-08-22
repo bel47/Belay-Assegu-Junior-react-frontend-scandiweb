@@ -2,10 +2,6 @@ import React, { Component } from "react";
 import {
   ProductCardBox,
   ImagePreview,
-  Title,
-  Link,
-  Icon,
-  Label,
   OutOfStock,
   ContentContainer,
   ProductCardBrand,
@@ -33,6 +29,11 @@ export class ProductCard extends Component {
     }
 
     this.context.addItem(itemId, item, selectedAttrs);
+
+    this.context.setNotification(
+      true,
+      this.props.product.brand + " " + this.props.product.name,
+    );
   };
 
   cardClickHandler = () => {
@@ -61,7 +62,6 @@ export class ProductCard extends Component {
             <img src={addtocart} />
           </AddtoCartButton>
         )}
-
         <ContentContainer>
           <ProductCardBrand inStock={!product.inStock}>
             {product.brand} {product.name}

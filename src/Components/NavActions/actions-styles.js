@@ -1,5 +1,4 @@
 import styled, { keyframes } from "styled-components";
-import CustomButton from './custom-button.styles';
 
 export const NavbarActionContainer = styled.div`
     display: flex;
@@ -73,6 +72,7 @@ export const CurrencyDropDown = styled.div`
     ${props => props.show && ` ${DropDownContent} {
                 display: block
         }`
-  }
+    }
+    z-index:3;
 `;
 

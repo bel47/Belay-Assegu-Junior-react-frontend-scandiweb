@@ -9,19 +9,6 @@ export class Actions extends Component {
     super(props)
     this.box = React.createRef()
   }
-
-  // componentDidMount() {
-  //     document.addEventListener('click', this.handleOutsideClick);
-  // }
-
-  // handleOutsideClick = (event) => {
-  //     if (this.box && !this.box.current.contains(event.target)) {
-  //         if (this.context.isDimmed) {
-  //             this.context.toggleDimm()
-  //         }
-  //     }
-  // }
-
   render() {
     return (
       <NavbarActionContainer>

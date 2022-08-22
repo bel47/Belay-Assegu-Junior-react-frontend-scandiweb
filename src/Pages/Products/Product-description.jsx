@@ -2,14 +2,12 @@ import React, { Component } from "react";
 import {
   PDPContainerLeft,
   PDPTumbnailContainer,
-  Thumbnail,
-  ImageSliderImage,
   PDPContainerRight,
-} from "./product-list-styles";
+} from "./products-styles";
 import { fetchProductAPI } from "../../Services/Api";
 import withRouter from "./withRouter";
-import ProductGallery from "./product-gallery";
-import ProductAttributes from "./Product-attributes";
+import ProductGallery from "../../Components/ProductDescription/product-gallery";
+import ProductAttributes from "../../Components/ProductDescription/product-attributes";
 
 export class ProductDescription extends Component {
   constructor(props) {
@@ -34,11 +32,6 @@ export class ProductDescription extends Component {
     this.getData(this.state.id);
   }
 
-  // setImage = (newUrl) => {
-  //   this.setState({
-  //     currentImage: newUrl,
-  //   });
-  // };
   render() {
     return (
       <>

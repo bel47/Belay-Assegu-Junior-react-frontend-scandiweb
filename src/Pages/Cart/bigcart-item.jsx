@@ -4,18 +4,18 @@ import {
   BigCartItems,
   BigCartItemBrand,
   BigCartItemLeft,
-  HR,
   BigCartItemRight,
   BigCartItemName,
   ItemPrice,
-  QuantityButton
+  QuantityButton,
 } from "./bigcart.styles";
-import CartAttributes from "./cart-attributes";
-import Carrousel from './carrousel';
+import CartAttributes from "./bigcart-attributes";
+import Carrousel from "./carrousel";
 import Price from "../../Components/Shared/Price";
+import bigminus from "../../Assets/bigminus.svg";
+import bigplus from "../../Assets/bigplus.svg";
 
 export class BigCartItem extends Component {
-
   render() {
     const { item, selectedAttrs, count, order } = this.props;
     return (
@@ -25,32 +25,25 @@ export class BigCartItem extends Component {
             <BigCartItemBrand> {item.brand} </BigCartItemBrand>
             <BigCartItemName> {item.name} </BigCartItemName>
             <ItemPrice>
-              {/* {this.context.currency}
-              {item.prices
-                .filter(
-                  (price) =>
-                    price.currency.symbol === `${this.context.currency}`
-                )[0]
-                .amount.toFixed(2)}{" "} */}
-                <Price item={item}/>
+              <Price item={item} />
             </ItemPrice>
           </div>
-          <CartAttributes
-            attrs={item.attributes}
-            order={order}
-            selectedAttrs={selectedAttrs}
-          />
+          <CartAttributes product={this.props} />
         </BigCartItemLeft>
+        <QuantityButton>
+          <img
+            src={bigplus}
+            onClick={() => this.context.setCount(order, count + 1)}
+            alt="plus"
+          />
+          <p>{count}</p>
+          <img
+            src={bigminus}
+            onClick={() => this.context.setCount(order, count - 1)}
+            alt="minus"
+          />
+        </QuantityButton>
         <BigCartItemRight>
-          <QuantityButton>
-            <button onClick={() => this.context.setCount(order, count + 1)}>
-              +
-            </button>
-            <p>{count}</p>
-            <button onClick={() => this.context.setCount(order, count - 1)}>
-              -
-            </button>
-          </QuantityButton>
           <Carrousel gallery={item.gallery} />
         </BigCartItemRight>
       </BigCartItems>
@@ -59,5 +52,4 @@ export class BigCartItem extends Component {
 }
 
 BigCartItem.contextType = CartContext;
-
 export default BigCartItem;

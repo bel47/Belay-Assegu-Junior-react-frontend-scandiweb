@@ -1,6 +1,15 @@
 import React, { Component, createContext } from 'react'
 import { v4 as uuidv4 } from 'uuid';
 
+window.localStorage.setItem(
+    'state',
+    JSON.stringify({
+        currentCategory: 'all',
+        currency: '$',
+        totalItemCount: 0,
+        ...JSON.parse(window.localStorage.getItem('state')),
+    })
+)
 const shallowEqual = (object1, object2) => {
     const keys1 = Object.keys(object1);
     const keys2 = Object.keys(object2);
@@ -15,17 +24,6 @@ const shallowEqual = (object1, object2) => {
     return true
 }
 
-window.localStorage.setItem(
-    'state',
-    JSON.stringify({
-        currentCategory: 'all',
-        currency: '$',
-        totalItemCount: 0,
-        ...JSON.parse(window.localStorage.getItem('state')),
-        isDimmed: false
-    })
-)
-
 const CartContext = createContext({})
 
 export class CartProvider extends Component {
@@ -37,7 +35,9 @@ export class CartProvider extends Component {
             currency: '$',
             isDimmed: false,
             totalItemCount: 0,
-            totalItemPrices: []
+            totalItemPrices: [],
+            showNotif: false,
+            productName:""
         }
     }
 
@@ -52,7 +52,6 @@ export class CartProvider extends Component {
     addItemCount = (plusCount) => {
         this.setState({ totalItemCount: this.state.totalItemCount + plusCount })
     }
-
     componentDidUpdate(prevProps, prevState) {
         if (prevState.items !== this.state.items) {
             let totalPrices = Array(5).fill({
@@ -80,9 +79,7 @@ export class CartProvider extends Component {
     }
 
     addItem = (itemId, itemInfo, selectedAttrs) => {
-
         this.addItemCount(1)
-
         if (!this.state.items || this.state.items.length === 0) {
             this.setState({
                 items: [{
@@ -90,7 +87,6 @@ export class CartProvider extends Component {
                     itemInfo: itemInfo,
                     itemUUID: uuidv4(),
                     selectedAttrs: selectedAttrs,
-
                     count: 1
                 }]
             })
@@ -136,7 +132,6 @@ export class CartProvider extends Component {
         if (newCount <= 0) {
             items.splice(position, 1)
         }
-
         this.setState({ items: items })
     }
 
@@ -148,10 +143,10 @@ export class CartProvider extends Component {
         this.setState({ currency: currency })
     }
 
-    toggleDimm = () => {
-        this.setState({ isDimmed: !this.state.isDimmed })
+    setNotification = (show, name) => {
+        this.setState({ showNotif: show, productName:name })
     }
-
+    
     render() {
         return (
             <CartContext.Provider value={{

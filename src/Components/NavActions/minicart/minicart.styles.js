@@ -50,20 +50,10 @@ export const CartButtons = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    // margin-right: 16px;
-    // margin-left: 16px;
     padding: 0px 32px;
-    // Gap:12px
-
 `;
-
-// export const CartDropdownButton = styled(CustomButton)`
-//    margin-top: auto;
-// `;
-
 export const CartContainer = styled.div`
     display: inline-block;
-    cursor: pointer;
 `;
 
 export const CartItemCount = styled.span`
@@ -89,13 +79,11 @@ export const CartItemCount = styled.span`
 export const CartContent = styled.div`
     display: none;
     position: absolute;
-    // width: 325px;
     top: 57px;
     background: #FFFFFF;
     padding: 32px, 16px; 
     margin-left: -270px;
     z-index: 1;
-    border: 1px solid black;
     height: fit-content;
     max-height: 45rem;
 `;
@@ -124,7 +112,6 @@ export const CartItemsContentContainer = styled.div`
     padding: 0px;
     gap: 8px;
     width: 293px;
-    height: 190px;
 `;
 
 export const CartItemsContent = styled.div`
@@ -133,21 +120,9 @@ export const CartItemsContent = styled.div`
     align-items: flex-start;
     padding: 0px;
     gap: 40px;
-    // width: 293px;
-    // height: 420px;  
 `;
 
 export const PriceLabel = styled.label`
-    // width: 50px;
-    // height: 26px;
-    // font-family: 'Raleway';
-    // font-style: normal;
-    // font-weight: 500;
-    // font-size: 16px;
-    // line-height: 160%;
-    // text-align: left;
-    // color: #1D1F22;
-
     width: 52px;
     height: 26px;
     font-weight: 500;
@@ -165,33 +140,14 @@ export const QuantityButton = styled.div`
     padding: 0px;
     gap: 32px;
     width: 24px;
-    height: 190px;
+    min-height: 190px;
 `;
 
 export const MiniCartImg = styled.div`
+    padding: 0px;
     width: 121px;
     height: 190px;
     background: url('${props => props.img}');
-`;
-
-export const PlusButton = styled.button`
-    box-sizing: border-box;
-    width: 24px;
-    height: 24px;
-    border: 1px solid #1D1F22;
-    background:#FFFFFF;
-    align-items: center;
-`;
-
-export const MinusButton = styled.button`
-    box-sizing: border-box;
-    width: 24px;
-    height: 24px;
-    border: 1px solid #1D1F22;
-    background:#FFFFFF;
-    align-items: center;
-    img {
-    }
 `;
 
 export const QtyLable = styled.label`
@@ -211,12 +167,10 @@ export const LeftContent = styled.div`
     padding: 0px;
     gap: 4px;
     width: 164px;
-    height: 190px;
+    // height: 190px;
 `;
 
 export const RightContent = styled.div`
-    // display: flex;
-    // flex-direction: row;
     align-items: flex-end;
     padding-right: 0px;
     & img{
@@ -233,14 +187,11 @@ export const Discription = styled.div`
     padding: 0px;
     gap: 4px;
     width: 136px;
-    height: 82px;
+    // height: 82px;
     & span {
         font-weight: 300;
         font-size: 16px;
         line-height: 160%;
-        // display: flex;
-        // align-items: center;
-        color: #1D1F22;
     }
 `;
 
@@ -253,4 +204,22 @@ export const MiniCartOverlay = styled.div`
     margin-top: 5rem;
     background-color: rgba(0, 0, 0, 0.35);
     // z-index: 10;
+`;
+
+export const Attributes = styled.div`
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px 5px;
+    // margin-top: 12px;
+    margin-bottom: 40px;
+`;
+
+export const Box = styled.div`
+    box-sizing: border-box;
+    // position: absolute;
+    width: 20px;
+    height: 20px;
+    left: 0px;
+    top: 0px;
+    border: 1px solid #5ECE7B;
 `;

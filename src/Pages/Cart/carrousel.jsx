@@ -37,14 +37,14 @@ export class Carrousel extends Component {
               <img src={Prev} alt="prev" />
             </div>
           ) : (
-            <div className="carrouselButtonPlaceholder"></div>
+            <div/>
           )}
           {this.state.currentImageIndex < gallery.length - 1 ? (
             <div onClick={() => this.nextImg()}>
               <img src={Next} alt="next" />
             </div>
           ) : (
-            <div className="carrouselButtonPlaceholder"></div>
+            <div/>
           )}
         </CaroselButton>
       </CarrouselContainer>

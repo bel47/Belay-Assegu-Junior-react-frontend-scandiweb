@@ -128,7 +128,7 @@ export const AddtoCartButton = styled.span`
     width: 52px;
     height: 52px;
     &:hover{
-      drop-shadow(0px 4px 11px rgba(29, 31, 34, 0.1));
+      drop-shadow(0px 4px 11px rgba(29, 31, 34, 0.8));
     }
     margin-top: 226px;
     margin-right: 30px;

@@ -1,12 +1,12 @@
-import React, { Component } from 'react'
-
-export class CartAttributes extends Component {
+import React, { Component } from "react";
+import CartAttributes from "../../Shared/CartAttributes";
+export class MiniCartAttributes extends Component {
   render() {
-    // console.log('Attributes', this.props)
+    const { product } = this.props;
     return (
-      <div>CartAttributes</div>
-    )
+        <CartAttributes product={product} type="mini"/>
+    );
   }
 }
 
-export default CartAttributes
+export default MiniCartAttributes;

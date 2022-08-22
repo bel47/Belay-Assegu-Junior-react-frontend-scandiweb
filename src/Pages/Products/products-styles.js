@@ -49,7 +49,6 @@ export const PDPTumbnailContainer = styled.div`
     display: flex;
 `;
 
-
 export const Thumbnail = styled.div`
       width:100px;
       height: 515px;
@@ -139,28 +138,10 @@ export const Attributes = styled.div`
 
 export const SwatchButton = styled.label`
     box-sizing: border-box;
-    // position: absolute;
     width: 63px;
     height: 45px;
-    // border: 1px solid #1D1F22;
-//    & span:active {
-//             background-color: #F7F7F7;
-//             transform: scale(.96);
-//             color: #292929;
-//     }
-
-    & span {
-        width: 63px;
-        height: 45px;
-        display: inline-block;
-        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-
-        &:active {
-             background-color: #F7F7F7;
-            transform: scale(.96);
-            color: #292929;
-        }
-    }
+   /* border: ${props => props.white ? '1px solid #D3D2D5' : ''};*/
+   cursor: pointer;
 `;
 
 export const AttributeButton = styled.label`
@@ -177,27 +158,10 @@ export const AttributeButton = styled.label`
     text-align: center;
     touch-action: manipulation;
     letter-spacing: 0.05em;
+    cursor: pointer;
 `;
 
 export const PDPPrice = styled.p`
-    // position: absolute;
-    // width: 86px;
-    // height: 46px;
-    // // left: 929px;
-    // // top: 494px;
-
-    // font-family: 'Raleway';
-    // font-style: normal;
-    // font-weight: 700;
-    // font-size: 24px;
-    // line-height: 18px;
-    // /* or 75% */
-
-    // display: flex;
-    // align-items: center;
-
-    // color: #1D1F22;
-
     font-family: 'Raleway';
     font-style: normal;
     font-weight: 700;

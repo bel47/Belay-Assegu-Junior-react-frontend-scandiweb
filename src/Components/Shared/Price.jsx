@@ -1,12 +1,11 @@
 import React, { Component } from "react";
-import CartContext from '../../context/cart-context';
+import CartContext from "../../context/cart-context";
 
 export class Price extends Component {
   render() {
-    const {item} = this.props;
+    const { item } = this.props;
     return (
       <>
-        {" "}
         {this.context.currency}
         {item.prices
           .filter(

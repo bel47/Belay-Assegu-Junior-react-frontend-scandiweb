@@ -2,16 +2,12 @@ import React, { Component, Fragment } from "react";
 import { Link } from "react-router-dom";
 
 import {
-  CartContainer,
   CartItemCount,
-  CartDropDown,
   CartContent,
   CartTitle,
   NavbarCartItems,
   CartButtons,
   CartDropdownContainer,
-  CartItemsContainer,
-  CartDropdownButton,
   TotalPriceContainer,
   SPAN,
   MiniCartOverlay,
@@ -21,7 +17,6 @@ import CartItem from "./cart-item";
 import { Button } from "../../Shared/Button";
 import cart from "../../../Assets/cart.svg";
 import { FaOpencart } from "react-icons/fa";
-// import { TotalPriceContainer } from "../../../Pages/Cart/bigcart.styles";
 import TotalPrice from "../../Shared/TotalPrice";
 
 export class CartButton extends Component {

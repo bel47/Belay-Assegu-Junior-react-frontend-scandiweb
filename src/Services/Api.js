@@ -3,15 +3,15 @@ import { onError } from '@apollo/client/link/error';
 
 import * as queries from '../GraphQL/Queries';
 
-const errorLink  = onError(({ graphQLErrors, networkError }) => {
+const errorLink = onError(({ graphQLErrors, networkError }) => {
     if (graphQLErrors)
-      graphQLErrors.map(({ message, locations, path }) =>
-        console.log(
-          `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
+        graphQLErrors.map(({ message, locations, path }) =>
+            console.log(
+                `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
+            )
         )
-      )
-    if (networkError) {alert(`[Network error]: ${networkError}`)}
-  });
+    if (networkError) { alert(`[Network error]: ${networkError}`) }
+});
 
 const link = from([
     errorLink,
@@ -20,8 +20,20 @@ const link = from([
     })
 ]);
 
+const defaultOptions = {
+    watchQuery: {
+        fetchPolicy: "no-cache",
+        errorPolicy: "ignore",
+    },
+    query: {
+        fetchPolicy: "no-cache",
+        errorPolicy: "all",
+    },
+};
 const client = new ApolloClient({
+    uri: 'http://localhost:4000/',
     cache: new InMemoryCache(),
+    defaultOptions: defaultOptions,
     link: link
 });
 

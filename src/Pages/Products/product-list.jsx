@@ -6,7 +6,7 @@ import {
   ProductsListContainer,
   ProductsList,
   CategoryName,
-} from "./product-list-styles";
+} from "./products-styles";
 
 class ProductList extends Component {
   constructor(props) {
@@ -14,11 +14,10 @@ class ProductList extends Component {
     this.state = {
       products: [],
       selectedCatagory: null,
-      currency: {},
     };
   }
 
-  getData = async (cat) => {
+  getData = (cat) => {
      fetchProductsAPI(cat).then((res) => {
       this.setState({
         products: res.data.category.products,
@@ -28,13 +27,12 @@ class ProductList extends Component {
   };
 
   componentDidMount() {
-    this.getData("all");
+    this.getData(this.context.currentCategory);
   }
   componentDidUpdate(prevProps, prevState) {
     if (prevState.selectedCatagory !== this.context.currentCategory) {
-      this.getData(this.context.currentCategory);
+      this.getData(this.state.selectedCatagory);
     }
-      // this.setState({ selectedCatagory: this.context.currentCategory })
   }
   render() {
     return (
@@ -52,5 +50,4 @@ class ProductList extends Component {
 }
 
 ProductList.contextType = CartContext
-
 export default ProductList;
