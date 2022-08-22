@@ -1,7 +1,19 @@
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Steps to follow to Runs the app
 
+- Refresh you node modules
+### `npm i`
+
+- Install the following packages 
+
+### `npm i @apollo/client`
+### `npm i graphql`
+### `npm i styled-components`
+### `npm i react-uuid`
+### `npm i react-icons`
+### `npm i interweave`
 ## Available Scripts
 
 In the project directory, you can run:
