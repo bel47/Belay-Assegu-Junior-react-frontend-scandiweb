@@ -94,6 +94,7 @@ export const SwatchButton = styled.label`
     box-sizing: border-box;
     width: 63px;
     height: 45px;
+    cursor: pointer;
     & span {
         width: 63px;
         height: 45px;
@@ -122,6 +123,7 @@ export const AttributeButton = styled.label`
     text-align: center;
     touch-action: manipulation;
     letter-spacing: 0.05em;
+    cursor: pointer;
 `;
 
 export const PDPPrice = styled.p`
