@@ -15,9 +15,9 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
 
 const link = from([
     errorLink,
-    // new HttpLink({
-    //     uri: 'http://localhost:4000/',
-    // })
+    new HttpLink({
+        uri: 'http://localhost:4000/',
+    })
 ]);
 
 const defaultOptions = {
@@ -31,7 +31,7 @@ const defaultOptions = {
     },
 };
 const client = new ApolloClient({
-    uri: 'http://localhost:4000/',
+    // uri: 'http://localhost:4000/',
     cache: new InMemoryCache(),
     defaultOptions: defaultOptions,
     link: link
