@@ -31,7 +31,6 @@ const defaultOptions = {
     },
 };
 const client = new ApolloClient({
-    // uri: 'http://localhost:4000/',
     cache: new InMemoryCache(),
     defaultOptions: defaultOptions,
     link: link
